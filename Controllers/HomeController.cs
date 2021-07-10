@@ -24,7 +24,13 @@ namespace Bigschool.Controllers
                 .Include(c => c.Lecturer)
                 .Include(c => c.Category)
                 .Where(c => c.DateTime > DateTime.Now);
-            return View(upcommingCourse);
+
+            var viewModel = new CoursesViewModel
+            {
+                UpcommingCourses = upcommingCourse,
+                ShowAction = User.Identity.IsAuthenticated
+            };
+            return View(viewModel);
         }
 
         public ActionResult About()
