@@ -6,9 +6,11 @@ using System.Net.Http;
 using System.Web.Http;
 using Bigschool.Models;
 using Microsoft.AspNet.Identity;
+using Bigschool.DTOs;
 
 namespace Bigschool.Controllers
 {
+    [Authorize]
     public class AttendancesController : ApiController
     {
         private ApplicationDbContext _dbContext;
@@ -19,14 +21,19 @@ namespace Bigschool.Controllers
         }
 
         [HttpPost]
-        public IHttpActionResult Attend([FromBody] int courseId)
+        public IHttpActionResult Attend(AttendanceDto attendanceDto)
         {
-            var attendance = new Attendance()
+            var userId = User.Identity.GetUserId();
+            if (_dbContext.Attendances.Any(a => a.AttendeeId == userId && a.CourseId == attendanceDto.CourseId))
+                return BadRequest("The Attendance alread exists");
+            var attendance = new Attendance
             {
-                CourseId = courseId, AttendeeId = User.Identity.GetUserId()
+                CourseId = attendanceDto.CourseId,
+                AttendeeId = userId
             };
             _dbContext.Attendances.Add(attendance);
             _dbContext.SaveChanges();
+
             return Ok();
         }
     }

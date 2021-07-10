@@ -16,14 +16,14 @@
     white-space: normal;
 }
 .navbar-inverse {
-    background-color: #d41d50;
-    border-color: #fbf6f6;
+    background-color: #ffd800;
+    border-color: #ffd800;
 }
 .navbar-inverse .navbar-nav > li >a {
-    color: white;
+    color:azure;
 }
 .navbar-inverse .navbar-brand {
-    color: white;
+    color: azure;
 }
 
 /*Course layout*/
@@ -52,3 +52,25 @@
     textarea {
         max-width: 280px;
     }
+
+/*course*/
+.course{
+    list-style:none;
+}
+.course > li {
+    position:relative;
+    margin-bottom:30px;
+}
+.course > li .date{
+    text-align:center;
+    background-color:#ffd800;
+    color:azure;
+    width:60px;
+    border-radius:8px;
+}
+.course > li .details{
+    position:absolute;
+    top:0;
+    left:70px;
+}
+
