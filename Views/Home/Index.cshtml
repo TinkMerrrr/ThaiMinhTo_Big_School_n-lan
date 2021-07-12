@@ -1,4 +1,6 @@
 ﻿@model Bigschool.ViewModels.CoursesViewModel
+@using Microsoft.AspNet.Identity
+@using Bigschool.Models
 @{
     ViewBag.Title = "Home Page";
 }
@@ -21,15 +23,26 @@
             @course.Lecturer.Name
             @if (Model.ShowAction)
             {
-            <button class="btn btn-default btn-sm js-toggle-follow" data-user-id="@course.LecturerId">Follow</button>
-            }
+    <button class="btn btn-default btn-sm js-toggle-follow" data-user-id="@course.LecturerId">Follow</button>}
         </span>
         <span class="category">
             @course.Category.Name
         </span>
         @if (Model.ShowAction)
         {
-        <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Going?</button>
+            var User_ID = @User.Identity.GetUserId();
+            ApplicationDbContext _dbContext = new ApplicationDbContext();
+            bool isGoing = _dbContext.Attendances.Any(a => a.CourseId == course.Id && a.AttendeeId == User_ID);
+            <div>
+                @if (!isGoing)
+                    {
+                        
+                    }
+                else
+                    {
+                        <span class="text-danger"> Da Tham Gia </span>
+                    }
+            </div>
         }
     </div>
 </li>}

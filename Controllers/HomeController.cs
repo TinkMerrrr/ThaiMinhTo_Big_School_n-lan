@@ -6,6 +6,8 @@ using System.Web.Mvc;
 using Bigschool.Models;
 using Bigschool.ViewModels;
 using System.Data.Entity;
+using Microsoft.AspNet.Identity;
+using System.Security.Principal;
 
 
 namespace Bigschool.Controllers
@@ -20,14 +22,14 @@ namespace Bigschool.Controllers
         }
         public ActionResult Index()
         {
-            var upcommingCourse = _dbContext.Courses
+            var upcommingCourses = _dbContext.Courses
                 .Include(c => c.Lecturer)
                 .Include(c => c.Category)
                 .Where(c => c.DateTime > DateTime.Now);
 
             var viewModel = new CoursesViewModel
             {
-                UpcommingCourses = upcommingCourse,
+                UpcommingCourses = upcommingCourses,
                 ShowAction = User.Identity.IsAuthenticated
             };
             return View(viewModel);
