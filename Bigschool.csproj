@@ -292,9 +292,6 @@
     <Content Include="Views\Courses\Create.cshtml" />
     <Content Include="Views\Courses\Attending.cshtml" />
     <Content Include="Views\Courses\Mine.cshtml" />
-    <Content Include="Views\Home\ManageLogins.cshtml" />
-    <Content Include="Views\Courses\EditCourse.cshtml" />
-    <Content Include="Views\Courses\DetailLecture.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
